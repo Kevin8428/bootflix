@@ -18,8 +18,8 @@
     function(data){
       // console.log('omdb ajax works');
       var movie = new app.MovieModel(data);
-      var view = new app.MovieView(data);
-
+      console.log(movie);
+      var view = new app.MovieView(movie);
     }
     )
 
@@ -64,18 +64,13 @@ app.getMovieByTitle = function getMovieByTitle(title) {
  */
 app.MovieModel = function MovieModel(options) {
 
-  var movie = {
-    id: options.imdbID,
-    title: options.Title,
-    rating: options.Rated,
-    director: options.Director,
-    plot: options.Plot,
-    year: options.Year,
-    genre: options.Genre
-  }
-  console.log('the movie model is below');
-  console.log(movie);
-  return movie
+  this.id = options.imdbID;
+  this.title = options.Title;
+  this.rating = options.Rated;
+  this.director = options.Director;
+  this.plot = options.Plot;
+  this.year = options.Year;
+  this.genre = options.Genre;
 
 
   // id, title, rating, director, plot, year, genre should all be in the `options` object
@@ -89,33 +84,54 @@ app.MovieModel = function MovieModel(options) {
  * @param options  - options object
  */
 app.MovieView = function MovieView(options) {
-  console.log('movie view workssss');
   // options should contain the `model` for which the view is using
-  var movie = {
-    id: options.imdbID,
-    title: options.Title,
-    rating: options.Rated,
-    director: options.Director,
-    plot: options.Plot,
-    year: options.Year,
-    genre: options.Genre,
-    render: function(){
-      console.log('method runssssss');
-      var newDiv = document.createElement('div');
-      newDiv.className = 'movie';
-      var newContent = document.createTextNode('id: '+ id+ '; '
-      +'<br>'+'title: '+ title + ';'
-      +'<br>'+'rating: '+ rating + ';'
-      +'<br>'+'director: '+ director + ';'
-      +'<br>'+'pot: '+ plot + ';'
-      +'<br>'+'year: '+ year + ';'
-      +'<br>'+'genre: '+ genre + ';'
-    );
-      newDiv.appendChild(newContent);
-      document.getElementById('movie-listing').appendChild(newDiv);
-    }
+
+  //DRAFT TWO
+  this.render = function(){
+    console.log('method runssssss');
+    var newDiv = document.createElement('div');
+    newDiv.className = 'movie';
+    var newContent = document.createTextNode('id: '+ id+ ''
+    +'<br>'+'title: '+ title + ';'
+    +'<br>'+'rating: '+ rating + ';'
+    +'<br>'+'director: '+ director + ';'
+    +'<br>'+'pot: '+ plot + ';'
+    +'<br>'+'year: '+ year + ';'
+    +'<br>'+'genre: '+ genre + ';'
+     );
+       newDiv.appendChild(newContent);
+       document.getElementById('movie-listing').appendChild(newDiv);
+
   }
 
+  //END DRAFT TWO
+
+  ////DRAFT ONE
+  // var movie = {
+  //   id: options.imdbID,
+  //   title: options.Title,
+  //   rating: options.Rated,
+  //   director: options.Director,
+  //   plot: options.Plot,
+  //   year: options.Year,
+  //   genre: options.Genre,
+  //   render: function(){
+  //     console.log('method runssssss');
+  //     var newDiv = document.createElement('div');
+  //     newDiv.className = 'movie';
+  //     var newContent = document.createTextNode('id: '+ id+ '; '
+  //     +'<br>'+'title: '+ title + ';'
+  //     +'<br>'+'rating: '+ rating + ';'
+  //     +'<br>'+'director: '+ director + ';'
+  //     +'<br>'+'pot: '+ plot + ';'
+  //     +'<br>'+'year: '+ year + ';'
+  //     +'<br>'+'genre: '+ genre + ';'
+  //   );
+  //     newDiv.appendChild(newContent);
+  //     document.getElementById('movie-listing').appendChild(newDiv);
+  //   }
+  // }
+/////END DRAFT ONE
 
   // 1. create a view
   // 2. create a render() method
@@ -123,8 +139,9 @@ app.MovieView = function MovieView(options) {
   //    you will want to add the id, title, rating, director, plot, year,
   //    and genre. See design/movielayout.html
   // 4. finally, render() will $(selector).append() each new '.movie' to "#movie-listing".
+}
+
   $(document).ready(function() {
     console.log('jquery runs');
 
   });
-}

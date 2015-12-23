@@ -94,16 +94,31 @@ app.MovieView = function MovieView(options) {
   render();
   function render(){
 
-    console.log('method runssssss');
     var newDiv = document.createElement('div');
     newDiv.className = 'movie';
+
+//FOREACH
+//     for (var property in options) {
+//     if (options.hasOwnProperty(property)) {
+//         console.log(property);
+//         var newContent = document.createTextNode(property + 'test');
+//         newDiv.appendChild(newContent);
+//     }
+// }
+
+    // for (i=0; i< Object.keys(options).length; i++){
+    //   var newContent = document.createTextNode('id: '+ options.id)
+    //   newDiv.appendChild(newContent);
+    // }
+    // console.log(Object.keys(options).length);
+
     var newContent = document.createTextNode('id: '+ options.id+ ''
-    +'<br>'+'title: '+ options.title + ';'
-    +'<br>'+'rating: '+ options.rating + ';'
-    +'<br>'+'director: '+ options.director + ';'
-    +'<br>'+'pot: '+ options.plot + ';'
-    +'<br>'+'year: '+ options.year + ';'
-    +'<br>'+'genre: '+ options.genre + ';'
+    +'title: '+ options.title + ';'
+    +'rating: '+ options.rating + ';'
+    +'director: '+ options.director + ';'
+    +'pot: '+ options.plot + ';'
+    +'year: '+ options.year + ';'
+    +'genre: '+ options.genre + ';'
      );
        newDiv.appendChild(newContent);
        document.getElementById('movie-listing').appendChild(newDiv);

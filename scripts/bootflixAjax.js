@@ -14,12 +14,14 @@
     console.log("app.getMovieById() has been called. nothing happens. wait.. some tumbleweeds are tumbling by! an ID of '" + id + "' was entered.");
 
     //tt0278488 //how high ID
+    //tt0112573 //braveheart
     $.getJSON('http://www.omdbapi.com/?i='+id+'&plot=short&r=json',
     function(data){
       // console.log('omdb ajax works');
       var movie = new app.MovieModel(data);
       console.log(movie);
       var view = new app.MovieView(movie);
+      console.log(view);
     }
     )
 
@@ -71,6 +73,9 @@ app.MovieModel = function MovieModel(options) {
   this.plot = options.Plot;
   this.year = options.Year;
   this.genre = options.Genre;
+  this.test = function(){
+    console.log('movie model function');
+  }
 
 
   // id, title, rating, director, plot, year, genre should all be in the `options` object
@@ -85,53 +90,27 @@ app.MovieModel = function MovieModel(options) {
  */
 app.MovieView = function MovieView(options) {
   // options should contain the `model` for which the view is using
+  // console.log('view workssss')
+  render();
+  function render(){
 
-  //DRAFT TWO
-  this.render = function(){
     console.log('method runssssss');
     var newDiv = document.createElement('div');
     newDiv.className = 'movie';
-    var newContent = document.createTextNode('id: '+ id+ ''
-    +'<br>'+'title: '+ title + ';'
-    +'<br>'+'rating: '+ rating + ';'
-    +'<br>'+'director: '+ director + ';'
-    +'<br>'+'pot: '+ plot + ';'
-    +'<br>'+'year: '+ year + ';'
-    +'<br>'+'genre: '+ genre + ';'
+    var newContent = document.createTextNode('id: '+ options.id+ ''
+    +'<br>'+'title: '+ options.title + ';'
+    +'<br>'+'rating: '+ options.rating + ';'
+    +'<br>'+'director: '+ options.director + ';'
+    +'<br>'+'pot: '+ options.plot + ';'
+    +'<br>'+'year: '+ options.year + ';'
+    +'<br>'+'genre: '+ options.genre + ';'
      );
        newDiv.appendChild(newContent);
        document.getElementById('movie-listing').appendChild(newDiv);
 
   }
 
-  //END DRAFT TWO
 
-  ////DRAFT ONE
-  // var movie = {
-  //   id: options.imdbID,
-  //   title: options.Title,
-  //   rating: options.Rated,
-  //   director: options.Director,
-  //   plot: options.Plot,
-  //   year: options.Year,
-  //   genre: options.Genre,
-  //   render: function(){
-  //     console.log('method runssssss');
-  //     var newDiv = document.createElement('div');
-  //     newDiv.className = 'movie';
-  //     var newContent = document.createTextNode('id: '+ id+ '; '
-  //     +'<br>'+'title: '+ title + ';'
-  //     +'<br>'+'rating: '+ rating + ';'
-  //     +'<br>'+'director: '+ director + ';'
-  //     +'<br>'+'pot: '+ plot + ';'
-  //     +'<br>'+'year: '+ year + ';'
-  //     +'<br>'+'genre: '+ genre + ';'
-  //   );
-  //     newDiv.appendChild(newContent);
-  //     document.getElementById('movie-listing').appendChild(newDiv);
-  //   }
-  // }
-/////END DRAFT ONE
 
   // 1. create a view
   // 2. create a render() method

@@ -112,7 +112,7 @@ app.MovieView = function MovieView(options) {
       +'<br>'+'genre: '+ genre + ';'
     );
       newDiv.appendChild(newContent);
-      document.getElementsByTagName('body')[0].appendChild(newDiv);
+      document.getElementById('movie-listing').appendChild(newDiv);
     }
   }
 

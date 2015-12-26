@@ -17,11 +17,9 @@
     //tt0112573 //braveheart
     $.getJSON('http://www.omdbapi.com/?i='+id+'&plot=short&r=json',
     function(data){
-      // console.log('omdb ajax works');
       var movie = new app.MovieModel(data);
       console.log(movie);
       var view = new app.MovieView(movie);
-      console.log(view);
     }
     )
 
@@ -43,6 +41,16 @@
 app.getMovieByTitle = function getMovieByTitle(title) {
 
   console.log("app.getMovieByTitle() has been called. the form stares at you blankly. wait, what? A title of '" + title + "' was entered");
+
+  $.getJSON('http://www.omdbapi.com/?t='+title+'&y=&plot=short&r=json',
+  function(data){
+    var movie = new app.MovieModel(data);
+    console.log(movie);
+    var view = new app.MovieView(movie);
+  }
+  )
+
+
 
   // request URL for omdb's title search:
   //http://www.omdbapi.com/?t=Die+Hard&y=1988&plot=full&r=json
@@ -90,38 +98,25 @@ app.MovieModel = function MovieModel(options) {
  */
 app.MovieView = function MovieView(options) {
   // options should contain the `model` for which the view is using
-  // console.log('view workssss')
+
+  // this.render = function(){
   render();
   function render(){
+    console.log('xxx render function');
 
-    var newDiv = document.createElement('div');
-    newDiv.className = 'movie';
-
-//FOREACH
-//     for (var property in options) {
-//     if (options.hasOwnProperty(property)) {
-//         console.log(property);
-//         var newContent = document.createTextNode(property + 'test');
-//         newDiv.appendChild(newContent);
-//     }
-// }
-
-    // for (i=0; i< Object.keys(options).length; i++){
-    //   var newContent = document.createTextNode('id: '+ options.id)
-    //   newDiv.appendChild(newContent);
-    // }
-    // console.log(Object.keys(options).length);
 
     var newContent = document.createTextNode('id: '+ options.id+ ''
     +'title: '+ options.title + ';'
     +'rating: '+ options.rating + ';'
     +'director: '+ options.director + ';'
-    +'pot: '+ options.plot + ';'
+    +'plot: '+ options.plot + ';'
     +'year: '+ options.year + ';'
     +'genre: '+ options.genre + ';'
      );
-       newDiv.appendChild(newContent);
-       document.getElementById('movie-listing').appendChild(newDiv);
+     var newDiv = document.createElement('div');
+     newDiv.className = 'movie';
+     newDiv.appendChild(newContent);
+     document.getElementById('movie-listing').appendChild(newDiv);
 
   }
 
@@ -139,3 +134,34 @@ app.MovieView = function MovieView(options) {
     console.log('jquery runs');
 
   });
+
+
+//////////NOTES
+
+  // var newDiv = document.createElement('div');
+  // newDiv.className = 'movie';
+
+//FOREACH
+//     for (var property in options) {
+//     if (options.hasOwnProperty(property)) {
+//         console.log(property);
+//         var newContent = document.createTextNode(property + 'test');
+//         newDiv.appendChild(newContent);
+//     }
+// }
+
+  // for (i=0; i< Object.keys(options).length; i++){
+  //   var newContent = document.createTextNode('id: '+ options.id)
+  //   newDiv.appendChild(newContent);
+  // }
+  // console.log(Object.keys(options).length);
+
+  // for (var property in options) {
+  //   if (options.hasOwnProperty(property)) {
+  //           console.log(options.property);
+  //
+  //           // var newContent = document.createTextNode(property + options.property);
+  //           // newDiv.appendChild(newContent);
+  //           // document.getElementById('movie-listing').appendChild(newDiv);
+  //     }
+  // }
